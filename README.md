@@ -62,7 +62,3 @@ Admin: Add software and perform all actions
 License
 
 This project is for educational purposes only.
-
----
-
-Let me know if you want me to generate the rest of the file contents (e.g., servlet classes or JSPs) or help you publish this on GitHub for submission.
