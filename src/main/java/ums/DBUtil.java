@@ -4,9 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class DBUtil {
-    private static final String URL = "jdbc:postgresql://localhost:5432/uams";
-    private static final String USER = "your_username";
-    private static final String PASSWORD = "your_password";
+    private static final String URL = "jdbc:postgresql://containers-us-west-xxx.railway.app:xxxx/dbname";
+    private static final String USER = "postgres";
+    private static final String PASSWORD = "your_actual_password";
 
     static {
         try {
