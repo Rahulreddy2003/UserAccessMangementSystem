@@ -1,4 +1,4 @@
-package com.example.uams;
+package ums;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,7 +11,7 @@ public class DBUtil {
     static {
         try {
             Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e) {  // <-- Fix the typo here
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
