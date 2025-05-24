@@ -19,19 +19,19 @@ A simple Java web application to manage user access requests using Servlets, JSP
 
 ## Setup Instructions
 
-### 1. Clone the Repository
+### Clone the Repository
 ```bash
 git clone https://github.com/YOUR_USERNAME/UserAccessManagementSystem.git
 cd UserAccessManagementSystem
 
-### 2. Database Setup
+### 1. Database Setup
 
 Create a PostgreSQL database named uams.
 
 Run the SQL script in database/schema.sql to create the required tables.
 
 
-### 3. Configure Database
+### 2. Configure Database
 
 Edit DBUtil.java and update:
 
@@ -39,11 +39,11 @@ private static final String URL = "jdbc:postgresql://localhost:5432/uams";
 private static final String USER = "your_username";
 private static final String PASSWORD = "your_password";
 
-### 4. Build the Project
+### 3. Build the Project
 
 mvn clean install
 
-### 5. Deploy on Apache Tomcat
+### 4. Deploy on Apache Tomcat
 
 Deploy the generated WAR file (target/uams.war) to your Tomcat webapps directory.
 
