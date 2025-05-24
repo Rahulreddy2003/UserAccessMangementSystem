@@ -1,27 +1,27 @@
-# Use a Java base image with Maven
+# Use Maven image to build the app
 FROM maven:3.8.5-eclipse-temurin-17 AS build
 
-# Set the working directory
+# Set working directory inside the container
 WORKDIR /app
 
-# Copy the pom.xml and download dependencies
+# Copy pom.xml and download dependencies
 COPY pom.xml .
 RUN mvn dependency:go-offline
 
-# Copy the source files
+# Copy the full source
 COPY src ./src
 
-# Build the application
+# Package the app as a shaded (fat) JAR
 RUN mvn clean package
 
-# Use a smaller runtime image
+# Use smaller base image to run the jar
 FROM eclipse-temurin:17-jdk-jammy
 
-# Set the working directory
+# Working directory in runtime container
 WORKDIR /app
 
-# Copy the built jar from the previous stage
-COPY --from=build /app/target/UserAccessManagementSystem-1.0-SNAPSHOT-shaded.jar app.jar
+# Copy the built jar from previous stage
+COPY --from=build /app/target/UserAccessManagementSystem.jar app.jar
 
-# Set the entrypoint
+# Run the application
 ENTRYPOINT ["java", "-jar", "app.jar"]
