@@ -1,13 +1,26 @@
-# Use official Tomcat base image with JDK 17
+# Stage 1: Build WAR file using Maven
+FROM maven:3.8.5-eclipse-temurin-17 AS build
+
+WORKDIR /app
+
+# Copy pom and download dependencies
+COPY pom.xml .
+RUN mvn dependency:go-offline
+
+# Copy the source code
+COPY src ./src
+COPY webapp ./webapp  # If you're using webapp folder
+
+# Package the WAR file
+RUN mvn clean package
+
+# Stage 2: Run WAR in Tomcat
 FROM tomcat:9.0-jdk17-temurin
 
-# Clean default apps
+# Remove default Tomcat apps
 RUN rm -rf /usr/local/tomcat/webapps/*
 
-# Copy your WAR file into the ROOT path
-COPY target/UserAccessManagementSystem.war /usr/local/tomcat/webapps/ROOT.war
+# Copy WAR file from build stage
+COPY --from=build /app/target/UserAccessManagementSystem.war /usr/local/tomcat/webapps/ROOT.war
 
-# Expose port 8080
 EXPOSE 8080
-
-# Start Tomcat (CMD already defined in base image)
